@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Social Media Post Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container">
+        <h1>AI Social Media Post Generator</h1>
+        <form id="generate-form">
+            <input type="text" id="prompt" placeholder="Enter your prompt" required>
+            <button type="submit">Generate Post</button>
+        </form>
+        <div id="result" class="result-box hidden">
+            <div class="grid-container">
+                <div class="box post-content">
+                    <h2>Post Content</h2>
+                    <p id="post-content"></p>
+                </div>
+                <div class="box hashtags">
+                    <h2>Hashtags</h2>
+                    <p id="hashtags"></p>
+                </div>
+                <div class="box caption">
+                    <h2>Caption</h2>
+                    <p id="caption"></p>
+                </div>
+                <div class="box image">
+                    <h2>Generated Image</h2>
+                    <img id="generated-image" src="" alt="Generated Image">
+                    <a id="download-link" href="#" download="generated_image.jpg">Download Image</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('generate-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const prompt = document.getElementById('prompt').value;
+
+            fetch('/generate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ prompt })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultBox = document.getElementById('result');
+                if (data.error) {
+                    resultBox.innerHTML = `<p class="error">${data.error}</p>`;
+                } else {
+                    document.getElementById('post-content').innerText = data.post_content;
+                    document.getElementById('hashtags').innerText = data.hashtags;
+                    document.getElementById('caption').innerText = data.caption;
+                    document.getElementById('generated-image').src = data.image_url;
+                    document.getElementById('download-link').href = data.image_url;
+                    resultBox.classList.remove('hidden');
+                    resultBox.classList.add('show');
+                }
+            })
+            .catch(error => {
+                const resultBox = document.getElementById('result');
+                resultBox.innerHTML = `<p class="error">An error occurred: ${error.message}</p>`;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: #121212;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding: 2rem 0;
+    overflow: auto;
+    position: relative;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1e1e1e, #121212);
+    z-index: -1;
+    animation: backgroundAnimation 10s infinite alternate;
+}
+
+@keyframes backgroundAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+.container {
+    background: rgba(30, 30, 30, 0.9);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    animation: fadeIn 1.5s ease-in-out;
+    max-width: 1200px;
+    width: 90%;
+    margin: 2rem auto;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    color: #007BFF;
+    animation: textGlow 2s infinite alternate;
+}
+
+@keyframes textGlow {
+    0% {
+        text-shadow: 0 0 5px #007BFF, 0 0 10px #007BFF, 0 0 20px #007BFF;
+    }
+    100% {
+        text-shadow: 0 0 10px #007BFF, 0 0 20px #007BFF, 0 0 40px #007BFF;
+    }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input, button {
+    margin: 0.5rem 0;
+    padding: 0.75rem;
+    border: 1px solid #333;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    background: #333;
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 10px #007BFF;
+}
+
+button {
+    background: linear-gradient(135deg, #007BFF, #0056b3);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #0056b3, #007BFF);
+    transform: scale(1.05);
+}
+
+.result-box {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    background: rgba(30, 30, 30, 0.9);
+    animation: fadeIn 1.5s ease-in-out;
+    overflow: auto;
+}
+
+.hidden {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.box {
+    background: rgba(50, 50, 50, 0.8);
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+}
+
+.box h2 {
+    font-size: 1.75rem;
+    color: #007BFF;
+    margin-bottom: 1rem;
+    animation: textGlow 2s infinite alternate;
+}
+
+.box p {
+    font-size: 1.1rem;
+    color: #ffffff;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: auto;
+    max-height: 200px;
+}
+
+.box img {
+    max-width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.box img:hover {
+    transform: scale(1.05);
+}
+
+a {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: #007BFF;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+a:hover {
+    background: #0056b3;
+}
+
+.error {
+    color: #ff4444;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+/* Additional Animations */
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.box.post-content {
+    animation: float 4s ease-in-out infinite;
+}
+
+.box.hashtags {
+    animation: float 4s ease-in-out infinite 1s;
+}
+
+.box.caption {
+    animation: float 4s ease-in-out infinite 2s;
+}
+
+.box.image {
+    animation: float 4s ease-in-out infinite 3s;
+}
